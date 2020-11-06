@@ -35,7 +35,7 @@ namespace _02Vydry.Pages
                 .Include(v => v.Location)
                 .Include(v => v.Mother)
                 .Include(v => v.Place)
-                .Include(v => v.founder).FirstOrDefaultAsync(m => m.TattooID == id);
+                .Include(v => v.founder).AsNoTracking().FirstOrDefaultAsync(m => m.TattooID == id);
 
             if (Vydra == null)
             {

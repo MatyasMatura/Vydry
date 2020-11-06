@@ -13,43 +13,43 @@
     <hr />
     <dl class="row">
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Vydra.Name)
+            Name
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Vydra.Name)
+            @Model.Vydra.Name
         </dd>
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Vydra.Color)
+            Color
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Vydra.Color)
+            @Model.Vydra.Color
         </dd>
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Vydra.Mother)
+            Mother
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Vydra.Mother.PlaceName)
+            @Model.Vydra.Mother.Name
         </dd>
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Vydra.Place)
+            Place
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Vydra.Place.Name)
+            @Model.Vydra.Place.Name
         </dd>
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Vydra.Location)
+            Location
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Vydra.Location.LocationID)
+            @Model.Vydra.Location.LocationID
         </dd>
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Vydra.founder)
+            Founder
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Vydra.founder.Id)
+            @Model.Vydra.founderID
         </dd>
     </dl>
-    
+
     <form method="post">
         <input type="hidden" asp-for="Vydra.TattooID" />
         <input type="submit" value="Delete" class="btn btn-danger" /> |

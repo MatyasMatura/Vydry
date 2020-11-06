@@ -20,15 +20,15 @@ namespace _02Vydry.Pages
             _context = context;
         }
 
-        public IList<Vydra> Vydra { get;set; }
+        public IEnumerable<Vydra> Vydra { get;set; }
 
-        public async Task OnGetAsync()
+        public void OnGet()
         {
-            Vydra = await _context.Vydras
+            Vydra = _context.Vydras
                 .Include(v => v.Location)
                 .Include(v => v.Mother)
                 .Include(v => v.Place)
-                .Include(v => v.founder).ToListAsync();
+                .Include(v => v.founder).AsNoTracking().AsEnumerable();
         }
     }
 }

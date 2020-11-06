@@ -29,6 +29,8 @@ namespace _02Vydry.Pages
 
         [BindProperty]
         public Vydra Vydra { get; set; }
+       // public Place Place { get; set; }
+
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
@@ -41,18 +43,25 @@ namespace _02Vydry.Pages
                 .Include(v => v.Location)
                 .Include(v => v.Mother)
                 .Include(v => v.Place)
-                .Include(v => v.founder).FirstOrDefaultAsync(m => m.TattooID == id);
+                .Include(v => v.founder).AsNoTracking().FirstOrDefaultAsync(m => m.TattooID == id);
+
+           // Place = await _context.Places.Include(p => p.LocationId).AsNoTracking().FirstOrDefaultAsync(p => p.Name == Vydra.PlaceName);
 
             if (Vydra == null)
             {
                 return NotFound();
             }
-           ViewData["LocationId"] = new SelectList(_context.Locations, "LocationID", "LocationID");
-           ViewData["MotherId"] = new SelectList(_context.Vydras, "TattooID", "PlaceName");
-           ViewData["PlaceName"] = new SelectList(_context.Places, "Name", "Name");
-           ViewData["founderID"] = new SelectList(_context.Set<IdentityUser>(), "Id", "Id");
+           LocationId = new SelectList(_context.Locations, "LocationID", "LocationID");
+           MotherId = new SelectList(_context.Vydras, "TattooID", "Name");
+           PlaceName = new SelectList(_context.Places, "Name", "Name");
+           founderID = new SelectList(_context.Set<IdentityUser>(), "Id", "Id");
             return Page();
         }
+
+        public SelectList LocationId { get; set; }
+        public SelectList MotherId { get; set; }
+        public SelectList PlaceName { get; set; }
+        public SelectList founderID { get; set; }
 
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://aka.ms/RazorPagesCRUD.
@@ -62,7 +71,10 @@ namespace _02Vydry.Pages
             {
                 return Page();
             }*/
+
             Vydra.founderID = GetUserId();
+            //Vydra.Place.Name = Vydra.PlaceName;
+            //Vydra.LocationId = Place.LocationId;
             _context.Attach(Vydra).State = EntityState.Modified;
 
             try

@@ -28,12 +28,17 @@ namespace _02Vydry.Pages
 
         public IActionResult OnGet()
         {
-        ViewData["LocationId"] = new SelectList(_context.Locations, "LocationID", "LocationID");
-        ViewData["MotherId"] = new SelectList(_context.Vydras, "TattooID", "PlaceName");
-        ViewData["PlaceName"] = new SelectList(_context.Places, "Name", "Name");
-        ViewData["founderID"] = new SelectList(_context.Set<IdentityUser>(), "Id", "Id");
+            LocationId = new SelectList(_context.Locations, "LocationID", "LocationID");
+            MotherId = new SelectList(_context.Vydras, "TattooID", "Name");
+            PlaceName = new SelectList(_context.Places, "Name", "Name");
+            founderID = new SelectList(_context.Set<IdentityUser>(), "Id", "Id");
             return Page();
         }
+        public SelectList LocationId { get; set; }
+        public SelectList MotherId { get; set; }
+        public SelectList PlaceName { get; set; }
+        public SelectList founderID { get; set; }
+
 
         [BindProperty]
         public Vydra Vydra { get; set; }

@@ -14,22 +14,22 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Vydra[0].Name)
+                Name
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Vydra[0].Color)
+                Color
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Vydra[0].Mother)
+                Mother
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Vydra[0].Place)
+                Place
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Vydra[0].Location)
+                Location
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Vydra[0].founder)
+                Founder
             </th>
             <th></th>
         </tr>
@@ -38,22 +38,22 @@
 @foreach (var item in Model.Vydra) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.Name)
+                @item.Name
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Color)
+                @item.Color
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Mother.PlaceName)
+                @item.Mother.Name
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Place.Name)
+                @item.Place.Name
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Location.LocationID)
+                @item.Location.LocationID
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.founder.Id)
+                @item.founderID
             </td>
             <td>
                 <a asp-page="./Edit" asp-route-id="@item.TattooID">Edit</a> |
