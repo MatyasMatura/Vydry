@@ -9,6 +9,7 @@ using _02Vydry.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore;
 
 namespace _02Vydry.Pages
 {
@@ -42,6 +43,9 @@ namespace _02Vydry.Pages
 
         [BindProperty]
         public Vydra Vydra { get; set; }
+        [BindProperty]
+        public Place Place { get; set; }
+
 
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://aka.ms/RazorPagesCRUD.
@@ -52,6 +56,9 @@ namespace _02Vydry.Pages
                 return Page();
             }*/
             Vydra.founderID = GetUserId();
+            Place = _context.Places.Include(p => p.Location).Include(p => p.Vydry).AsNoTracking().FirstOrDefault(p => p.Name == Vydra.PlaceName);
+            Place.Name = Vydra.PlaceName;
+            Vydra.LocationId = Place.LocationId;
             _context.Vydras.Add(Vydra);
             await _context.SaveChangesAsync();
 

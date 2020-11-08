@@ -29,7 +29,8 @@ namespace _02Vydry.Pages
 
         [BindProperty]
         public Vydra Vydra { get; set; }
-       // public Place Place { get; set; }
+        [BindProperty]
+        public Place Place { get; set; }
 
 
         public async Task<IActionResult> OnGetAsync(int? id)
@@ -45,7 +46,6 @@ namespace _02Vydry.Pages
                 .Include(v => v.Place)
                 .Include(v => v.founder).AsNoTracking().FirstOrDefaultAsync(m => m.TattooID == id);
 
-           // Place = await _context.Places.Include(p => p.LocationId).AsNoTracking().FirstOrDefaultAsync(p => p.Name == Vydra.PlaceName);
 
             if (Vydra == null)
             {
@@ -73,8 +73,9 @@ namespace _02Vydry.Pages
             }*/
 
             Vydra.founderID = GetUserId();
-            //Vydra.Place.Name = Vydra.PlaceName;
-            //Vydra.LocationId = Place.LocationId;
+            Place = _context.Places.Include(p => p.Location).Include(p => p.Vydry).AsNoTracking().FirstOrDefault(p => p.Name == Vydra.PlaceName);
+            Place.Name = Vydra.PlaceName;
+            Vydra.LocationId = Place.LocationId;
             _context.Attach(Vydra).State = EntityState.Modified;
 
             try
