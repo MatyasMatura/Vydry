@@ -38,19 +38,19 @@
 @foreach (var item in Model.Vydra) {
         <tr>
             <td>
-                @item.Name
+                @(item.Name)
             </td>
             <td>
                 @item.Color
             </td>
             <td>
-                @item.Mother.Name
+                @(item.Mother?.Name ?? "neznámá")
             </td>
             <td>
                 @item.Place.Name
             </td>
             <td>
-                @item.Location.LocationID
+                @item.Location.Name
             </td>
             <td>
                 @item.founderID

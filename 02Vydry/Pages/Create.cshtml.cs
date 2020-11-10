@@ -33,9 +33,21 @@ namespace _02Vydry.Pages
             MotherId = new SelectList(_context.Vydras, "TattooID", "Name");
             PlaceName = new SelectList(_context.Places, "Name", "Name");
             founderID = new SelectList(_context.Set<IdentityUser>(), "Id", "Id");
+
+            PlaceNames = new List<SelectListItem>();
+            foreach (var item in _context.Places.Include(l => l.Location).AsEnumerable<Place>())
+            {
+                PlaceNames
+                    .Add(new SelectListItem($"{item.Name} ({item.Location.Name})", 
+                                               $"{item.LocationId};{item.Name}"));
+            }
+
             return Page();
         }
         public SelectList LocationId { get; set; }
+
+        public List<SelectListItem> PlaceNames { get; set; }
+
         public SelectList MotherId { get; set; }
         public SelectList PlaceName { get; set; }
         public SelectList founderID { get; set; }
@@ -55,10 +67,16 @@ namespace _02Vydry.Pages
             {
                 return Page();
             }*/
+            
             Vydra.founderID = GetUserId();
-            Place = _context.Places.Include(p => p.Location).Include(p => p.Vydry).AsNoTracking().FirstOrDefault(p => p.Name == Vydra.PlaceName);
-            Place.Name = Vydra.PlaceName;
-            Vydra.LocationId = Place.LocationId;
+            //Place = _context.Places.Include(p => p.Location).Include(p => p.Vydry).AsNoTracking().FirstOrDefault(p => p.Name == Vydra.PlaceName);
+            //Place.Name = Vydra.PlaceName;
+            string[] data;
+            data = Vydra.PlaceName.Split(';');
+            Vydra.LocationId = int.Parse(data[0]);
+            Vydra.PlaceName = data[1];
+
+            //Vydra.LocationId = Place.LocationId;
             _context.Vydras.Add(Vydra);
             await _context.SaveChangesAsync();
 

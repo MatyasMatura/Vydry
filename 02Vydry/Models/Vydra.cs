@@ -11,6 +11,9 @@ namespace _02Vydry.Models
     public class Vydra
     {
         public string Name { get; set; }
+
+        //public Gender Gender { get; set; }
+
         public string Color { get; set; }
         [Key]
         public int? TattooID { get; set; }
